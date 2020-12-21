@@ -5,6 +5,7 @@ import { offsetLimitPagination } from "@apollo/client/utilities";
 
 const PokemonListPage = () => {
     const { setPokemon } = useContext(ContextPokemon);
+    
     const [limit, setLimit] = useState(10);
     const [offset, setOffset] = useState(10);
 
@@ -25,7 +26,7 @@ const PokemonListPage = () => {
 
     const {loading, error, data, fetchMore} = useQuery(FEED_QUERY, {
       variables: {
-        offset,
+        offset:0,
         limit,
       },
       
@@ -38,12 +39,13 @@ const PokemonListPage = () => {
     
     const loadMore = () => {
         return <button 
+        entries={data.pokemons || []}
           onClick={() => {
             const currentLength = data.pokemons.results.length;
-            data.pokemons.results.fetchMore({
+            fetchMore({
               variables: {
                 offset: currentLength,
-                limit:10
+                limit:10,
               },
             }).then(fetchMoreResult => {
               // Update variables.limit for the original query to include
@@ -58,7 +60,23 @@ const PokemonListPage = () => {
     <>
         <h4>List Pokemon</h4>
         <ul>{listPokemon}</ul>
-        <ul>{loadMore}</ul>        
+        <ul>{loadMore}</ul>
+        {/* <ul><button 
+         entries={data.pokemons || []}
+          onClick={() => {
+            let currentLength = data.pokemons.results.length;
+            fetchMore({
+              variables: {
+                offset: currentLength,
+                limit:10
+              },
+            }).then(fetchMoreResult => {
+              // Update variables.limit for the original query to include
+              // the newly added feed items.
+              setLimit(currentLength + fetchMoreResult.data.pokemons.results.length);
+            });
+          }
+        }> Load More</button></ul>         */}
        
     </>
   )
