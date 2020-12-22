@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react';
 import { useQuery, gql } from '@apollo/client';
 import ContextPokemon from '../ContextPokemon';
-import { offsetLimitPagination } from "@apollo/client/utilities";
+
 
 const PokemonListPage = () => {
     const { setPokemon } = useContext(ContextPokemon);
-    
+
     const [limit, setLimit] = useState(10);
     const [offset, setOffset] = useState(10);
 
@@ -26,57 +26,54 @@ const PokemonListPage = () => {
 
     const {loading, error, data, fetchMore} = useQuery(FEED_QUERY, {
       variables: {
-        offset:0,
+        offset,
         limit,
       },
       
     });
    
 
-    const listPokemon =  data?.pokemons.results.map((value) => {
-        return <button key={value.name} onClick={() => setPokemon(value.name)}>{value.name}</button>;
-    })
-    
+   
     const loadMore = () => {
-        return <button 
-        entries={data.pokemons || []}
-          onClick={() => {
-            const currentLength = data.pokemons.results.length;
-            fetchMore({
-              variables: {
-                offset: currentLength,
-                limit:10,
-              },
-            }).then(fetchMoreResult => {
-              // Update variables.limit for the original query to include
-              // the newly added feed items.
-              setLimit(currentLength + fetchMoreResult.data.pokemons.results.length);
-            });
-          }
-        }> Load More</button>
-    }
+      const currentLength = data.pokemons.results.length;
+      fetchMore({
+          variables: {
+              offset: currentLength,
+              limit: 10
+          },
+      }).then(fetchMoreResult => {
+          // Update variables.limit for the original query to include
+          // the newly added feed items.
+          setLimit(currentLength + fetchMoreResult.data.pokemons.results.length);
+      });
+  }
+
+  const listPokemon =  data?.pokemons.results.map((value) => {
+    return <button key={value.name} onClick={() => setPokemon(value.name)}>{value.name}</button>;
+})
+
 
   return (
     <>
         <h4>List Pokemon</h4>
-        <ul>{listPokemon}</ul>
-        <ul>{loadMore}</ul>
-        {/* <ul><button 
-         entries={data.pokemons || []}
-          onClick={() => {
-            let currentLength = data.pokemons.results.length;
+        <ul><button onClick={() => loadMore()} >Next-</button></ul>
+        {/* <ul><button onClick={() => {
+         
             fetchMore({
               variables: {
-                offset: currentLength,
-                limit:10
+                offset:setOffset,
+                limit:setLimit,
               },
             }).then(fetchMoreResult => {
               // Update variables.limit for the original query to include
               // the newly added feed items.
-              setLimit(currentLength + fetchMoreResult.data.pokemons.results.length);
+              setOffset(setOffset + setLimit);
             });
-          }
-        }> Load More</button></ul>         */}
+        }} >next</button></ul> */}
+        <ul>{listPokemon}</ul>
+
+       
+        
        
     </>
   )

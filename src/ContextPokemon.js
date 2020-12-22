@@ -4,11 +4,17 @@ import React, {useState} from 'react';
 const ContextPokemon = React.createContext();
 
 export const ProviderPokemon = ({children}) => {
+    
+    const [tangkapan, setTangkapan ] = useState("");
+
     const [pokemon, setPokemon] = useState(null);
 
     const value = {
         pokemon,
-        setPokemon
+        tangkapan,
+        setPokemon,
+        setTangkapan
+
     };
 
     return (

@@ -1,12 +1,21 @@
 import { useQuery, gql } from '@apollo/client';
 import React, { useContext, useState } from 'react';
 import ContextPokemon from '../ContextPokemon';
+import { cartItemsVar } from '../cache.js';
+
 
 const PokemonDetailPage = () => {
  
-    const {pokemon} = useContext(ContextPokemon);
+    const {pokemon, tangkapan, setTangkapan} = useContext(ContextPokemon);
+
+    const {nickName, setNickName} = useState(null);
 
     const [detailPokemon, setDetailPokemon] = useState(null);
+
+    const handleChange= (e) => {
+      setNickName(e.target.value);
+    }
+
 
     const GET_POKEMON = gql`
     query pokemon($name: String!) {
@@ -47,16 +56,21 @@ const PokemonDetailPage = () => {
         skip: !pokemon
     });
 
+    const tangkapPokemon = (props) => {
+        setTangkapan([...tangkapan, pokemon]);
+    }
+
     const loopingFor = (detailPokemon) => {
         let abilities = detailPokemon?.abilities;
         let types = detailPokemon?.types;
    
-         return(
-           <table>
+      return(
+           <table style={{width: '50em'}}>
              <thead>
                <th>Gambar</th>
                <th>Ability</th>
                <th>Type</th>
+               <th>Nick Name</th>
                <th>Action</th>
              </thead>
              <tbody>
@@ -75,8 +89,16 @@ const PokemonDetailPage = () => {
                      )
                    }
                    </td>
+                   <td>
+                   <input
+                        type="text"
+                        value={nickName}
+                        onChange={handleChange}
+                     />
+                   </td>
                  <td>
-                   <button kind="primary" onClick={() => console.log("NickName!")}>Tangkap</button>
+                   <button kind="primary" onClick={() => tangkapPokemon(pokemon)}>Tangkap</button>
+                     
                  </td>
                </tr>
                </tbody>
