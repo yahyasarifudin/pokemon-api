@@ -9,8 +9,6 @@ const PokemonDetailPage = () => {
 
     const [detailPokemon, setDetailPokemon] = useState(null);
 
-    
-
 
     const GET_POKEMON = gql`
     query pokemon($name: String!) {
@@ -88,7 +86,7 @@ const PokemonDetailPage = () => {
                    <td>
                    </td>
                  <td>
-                   <button kind="primary" onClick={() => tangkapPokemon(pokemon)}>Tangkap</button>
+                  { detailPokemon ? <button kind="primary" onClick={() => tangkapPokemon(pokemon)}>Tangkap</button> : null }
                      
                  </td>
                </tr>

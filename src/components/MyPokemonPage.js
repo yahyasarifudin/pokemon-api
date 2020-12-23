@@ -63,10 +63,9 @@ const MyPokemonPage = () => {
                     <th>Aksi</th>
                 </thead>
                 <tbody>
-                 
                       {tangkapan?.map(i => 
                        <tr>
-                        <td key={i} ><input type="text" readOnly key={i.id} name={i.value} value={i} /></td>
+                        <td><input type="text" readOnly key={i.id} name={i.value} value={i} /></td>
                         <td>  
                                 <input
                                   type="text"
@@ -78,6 +77,7 @@ const MyPokemonPage = () => {
                           <td><button onClick={() => hapusPokemon(i)}>hapus</button></td>
                        </tr>
                       )}
+                    
                 </tbody>
                 <tfoot>
                 <tr><span>{tangkapan?.lenght}</span></tr>
