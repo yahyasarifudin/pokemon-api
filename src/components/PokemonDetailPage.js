@@ -3,18 +3,13 @@ import React, { useContext, useState } from 'react';
 import ContextPokemon from '../ContextPokemon';
 import { cartItemsVar } from '../cache.js';
 
-
 const PokemonDetailPage = () => {
  
     const {pokemon, tangkapan, setTangkapan} = useContext(ContextPokemon);
 
-    const {nickName, setNickName} = useState(null);
-
     const [detailPokemon, setDetailPokemon] = useState(null);
 
-    const handleChange= (e) => {
-      setNickName(e.target.value);
-    }
+    
 
 
     const GET_POKEMON = gql`
@@ -67,14 +62,15 @@ const PokemonDetailPage = () => {
       return(
            <table style={{width: '50em'}}>
              <thead>
+               <th>Nama</th>
                <th>Gambar</th>
                <th>Ability</th>
                <th>Type</th>
-               <th>Nick Name</th>
                <th>Action</th>
              </thead>
              <tbody>
                <tr>
+                 <td>{detailPokemon?.name}</td>
                  <td><ShowImg user={detailPokemon?.sprites.back_default}/></td>
                  <td>
                    { 
@@ -90,11 +86,6 @@ const PokemonDetailPage = () => {
                    }
                    </td>
                    <td>
-                   <input
-                        type="text"
-                        value={nickName}
-                        onChange={handleChange}
-                     />
                    </td>
                  <td>
                    <button kind="primary" onClick={() => tangkapPokemon(pokemon)}>Tangkap</button>

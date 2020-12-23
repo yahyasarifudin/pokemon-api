@@ -1,18 +1,23 @@
 import React, { useContext, useState } from 'react';
 import { render } from 'react-dom';
 import ContextPokemon from '../ContextPokemon';
-// import {
-//   ApolloClient,
-//   InMemoryCache,
-//   ApolloProvider,
-//   useQuery,
-//   gql
-// } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql
+} from '@apollo/client';
 
 const MyPokemonPage = () => {
-    const {pokemon, tangkapan} = useContext(ContextPokemon);
+    const {pokemon, tangkapan, setTangkapan} = useContext(ContextPokemon);
 
-    // const cache = new InMemoryCache();
+    const [state, setState] = useState("");
+
+
+    const hapusPokemon = () => {
+      setTangkapan([...tangkapan, tangkapan]);
+    }
     
     // const GET_POKEMON = gql`
     // query pokemon($name: String!) {
@@ -49,7 +54,6 @@ const MyPokemonPage = () => {
     //   </div>
     //   : <p>No items in your cart</p>
     // );
-    let nickname ="this is nickname";
 
         return(
             <table>
@@ -59,14 +63,21 @@ const MyPokemonPage = () => {
                     <th>Aksi</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        {tangkapan ? 
-                          <td>{tangkapan}</td> :<td>Kosong</td> }
-                        <td>{nickname}</td>
-                        <td><button>hapus</button></td>
-
-                    </tr>
-                
+                 
+                      {tangkapan?.map(i => 
+                       <tr>
+                        <td key={i} ><input type="text" readOnly key={i.id} name={i.value} value={i} /></td>
+                        <td>  
+                                <input
+                                  type="text"
+                                  value={state}
+                                  name="nickname"
+                                  onChange={event => setState(event.target.value)}
+                                  />
+                                </td>
+                          <td><button onClick={() => hapusPokemon(i)}>hapus</button></td>
+                       </tr>
+                      )}
                 </tbody>
                 <tfoot>
                 <tr><span>{tangkapan?.lenght}</span></tr>
