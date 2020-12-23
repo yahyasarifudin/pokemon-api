@@ -58,7 +58,8 @@ const PokemonDetailPage = () => {
         let types = detailPokemon?.types;
    
       return(
-           <table style={{width: '50em'}}>
+        <>
+           <table>
                <th>Nama</th>
                <th>Gambar</th>
                <th>Ability</th>
@@ -90,6 +91,7 @@ const PokemonDetailPage = () => {
                </tr>
                </tbody>
              </table>
+            </>
          )
        }
        return <>{loopingFor(detailPokemon)}</>

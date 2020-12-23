@@ -23,20 +23,21 @@ function App() {
             <div className="col-md-12">
               <PokemonListPage />
             </div>
-          </div>
-          <table>
-            <tbody>
-            <tr>
-              <td><p>Detail Pokemon :</p>
+
+            <div className="col-md-12">
+              <div class="row">
+              <div className="col-md-6">
                 <PokemonDetailPage />
-              </td>
-              <td>
-                <p>My Pokemon :</p>
-                <MyPokemonPage />
-              </td>
-            </tr>
-            </tbody>
-          </table>
+              </div>
+              <div className="col-md-6">
+               <MyPokemonPage />
+
+              </div>
+              </div>
+            </div>
+
+          </div>
+          
         </div>
       </ProviderPokemon>
     </ApolloProvider>

@@ -57,7 +57,6 @@ const MyPokemonPage = () => {
     // );
 
         return(
-      
             <table>
                 <thead>
                     <th>Nama</th>
