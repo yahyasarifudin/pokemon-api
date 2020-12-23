@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import ContextPokemon from '../ContextPokemon';
 import {
@@ -19,6 +19,7 @@ const MyPokemonPage = () => {
       setTangkapan([...tangkapan, tangkapan]);
     }
     
+   
     // const GET_POKEMON = gql`
     // query pokemon($name: String!) {
     //   pokemon(name: $name) {
@@ -56,6 +57,7 @@ const MyPokemonPage = () => {
     // );
 
         return(
+      
             <table>
                 <thead>
                     <th>Nama</th>
@@ -63,9 +65,9 @@ const MyPokemonPage = () => {
                     <th>Aksi</th>
                 </thead>
                 <tbody>
-                      {tangkapan?.map(i => 
-                       <tr>
-                        <td><input type="text" readOnly key={i.id} name={i.value} value={i} /></td>
+                      {tangkapan?.map((i, index) => 
+                       <tr key={index}>
+                        <td key={index}><input type="text" readOnly name={index} value={i} /></td>
                         <td>  
                                 <input
                                   type="text"
@@ -76,7 +78,8 @@ const MyPokemonPage = () => {
                                 </td>
                           <td><button onClick={() => hapusPokemon(i)}>hapus</button></td>
                        </tr>
-                      )}
+                        )
+                      }
                     
                 </tbody>
                 <tfoot>
