@@ -1,11 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import PokemonListPage from './components/PokemonListPage';
 import PokemonDetailPage from './components/PokemonDetailPage';
 import MyPokemonPage from './components/MyPokemonPage';
 import { ProviderPokemon } from './ContextPokemon';
-import { useState } from "react";
-import { ApolloClient, gql, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 
 function App() {

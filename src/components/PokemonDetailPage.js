@@ -1,7 +1,6 @@
 import { useQuery, gql } from '@apollo/client';
 import React, { useContext, useState } from 'react';
 import ContextPokemon from '../ContextPokemon';
-import { cartItemsVar } from '../cache.js';
 
 const PokemonDetailPage = () => {
  
@@ -39,7 +38,7 @@ const PokemonDetailPage = () => {
       }
     `;
 
-    const {loading, error, data} = useQuery(GET_POKEMON, {
+    const {data} = useQuery(GET_POKEMON, {
         variables: {
             name: pokemon
         },
@@ -113,15 +112,10 @@ const PokemonDetailPage = () => {
    
    function ShowImg(props){
      return(
-         <img src={props.user} />
+         <img src={props.user} alt="img pokemon" ></img>
      )
    }
    
-   function Tangkap(){
-     return(
-       <span>ADD</span>
-     )
-   }
 
   
 

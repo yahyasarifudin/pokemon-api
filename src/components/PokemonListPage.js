@@ -7,7 +7,7 @@ const PokemonListPage = () => {
     const { setPokemon } = useContext(ContextPokemon);
 
     const [limit, setLimit] = useState(10);
-    const [offset, setOffset] = useState(10);
+    const [offset] = useState(10);
 
     const FEED_QUERY = gql`
     query pokemons($limit: Int, $offset: Int) {
@@ -24,7 +24,7 @@ const PokemonListPage = () => {
       }
     `;
 
-    const {loading, error, data, fetchMore} = useQuery(FEED_QUERY, {
+    const { data, fetchMore} = useQuery(FEED_QUERY, {
       variables: {
         offset,
         limit,
@@ -57,19 +57,6 @@ const PokemonListPage = () => {
     <>
         <h4>List Pokemon</h4>
         <ul><button onClick={() => loadMore()} >Next-</button></ul>
-        {/* <ul><button onClick={() => {
-         
-            fetchMore({
-              variables: {
-                offset:setOffset,
-                limit:setLimit,
-              },
-            }).then(fetchMoreResult => {
-              // Update variables.limit for the original query to include
-              // the newly added feed items.
-              setOffset(setOffset + setLimit);
-            });
-        }} >next</button></ul> */}
         <ul>{listPokemon}</ul>
 
        
