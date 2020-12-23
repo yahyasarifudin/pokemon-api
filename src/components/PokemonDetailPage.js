@@ -59,13 +59,11 @@ const PokemonDetailPage = () => {
    
       return(
            <table style={{width: '50em'}}>
-             <thead>
                <th>Nama</th>
                <th>Gambar</th>
                <th>Ability</th>
                <th>Type</th>
                <th>Action</th>
-             </thead>
              <tbody>
                <tr>
                  <td>{detailPokemon?.name}</td>

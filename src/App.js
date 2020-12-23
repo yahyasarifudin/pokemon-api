@@ -25,15 +25,17 @@ function App() {
             </div>
           </div>
           <table>
+            <tbody>
             <tr>
-              <td><p><h4>Detail Pokemon :</h4></p>
+              <td><p>Detail Pokemon :</p>
                 <PokemonDetailPage />
               </td>
               <td>
-                <p><h4>My Pokemon :</h4></p>
+                <p>My Pokemon :</p>
                 <MyPokemonPage />
               </td>
             </tr>
+            </tbody>
           </table>
         </div>
       </ProviderPokemon>

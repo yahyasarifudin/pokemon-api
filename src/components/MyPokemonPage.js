@@ -15,7 +15,7 @@ const MyPokemonPage = () => {
     const [state, setState] = useState("");
 
 
-    const hapusPokemon = () => {
+    const hapusPokemon = (i) => {
       setTangkapan([...tangkapan, tangkapan]);
     }
     
@@ -67,16 +67,17 @@ const MyPokemonPage = () => {
                 <tbody>
                       {tangkapan?.map((i, index) => 
                        <tr key={index}>
-                        <td key={index}><input type="text" readOnly name={index} value={i} /></td>
-                        <td>  
+                        <td key={index}><input type="text" key={index} readOnly name={index} value={i} /></td>
+                        <td key={index}>  
                                 <input
                                   type="text"
+                                  key={index}
                                   value={state}
                                   name="nickname"
                                   onChange={event => setState(event.target.value)}
                                   />
                                 </td>
-                          <td><button onClick={() => hapusPokemon(i)}>hapus</button></td>
+                          <td key={index}><button key={index} onClick={() => hapusPokemon(index)}>hapus</button></td>
                        </tr>
                         )
                       }
